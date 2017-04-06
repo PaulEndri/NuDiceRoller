@@ -45,7 +45,7 @@ class MongoObject {
                 var document = this.document = db.collection(this.collection).findOne(this._id);
 
                 for (var i in document) {
-                    this.i = document[i];
+                    this[i] = document[i];
                 }
             });
         });
