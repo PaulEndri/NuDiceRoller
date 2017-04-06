@@ -1,8 +1,17 @@
 "use strict";
-var Dice = require('./dice.js');
-var MongoObject = require("../abstraction/mongoObject.js");
+var Dice        = require('../app/dice');
+var MongoObject = require('../etc/mongoObject');
 
 class Roller extends MongoObject {
+    get schema() {
+        return {
+            name:        string,
+            activeTable: string,
+            history:     {},
+            activeDice:  {}
+        };
+    }
+
     get collection() {
         return 'rollers';
     }

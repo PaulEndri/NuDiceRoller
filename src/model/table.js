@@ -1,9 +1,15 @@
 "use strict";
 var Roller = require("./roller.js");
-var MongoObject = require("../abstraction/mongoObject.js");
+var MongoObject = require("../etc/mongoObject.js");
 
 class Table extends MongoObject {
-
+    get schema() {
+        return {
+            name: string,
+            players: [],
+            playerMax: int
+        };
+    }
     get collection() {
         return 'tables';
     }
@@ -15,7 +21,7 @@ class Table extends MongoObject {
 
         this.players.push(id);
 
-        return new Roller(id, this.id);
+        return new Roller(id, this._id);
     }
 }
 

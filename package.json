@@ -9,11 +9,12 @@
   "author": "Juan Sedano",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.6.4",
     "assert": "^1.4.1",
+    "body-parser": "^1.17.1",
     "browserify": "^14.3.0",
     "express": "^4.15.2",
-    "mongodb": "^2.2.25",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "method-override": "^2.3.8",
+    "mongodb": "^2.2.25"
   }
 }

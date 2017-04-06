@@ -1,6 +1,6 @@
-var Dice = require('./dice.js');
-var Roller = require('./roller.js');
-var Table = require('./table.js');
+var Dice = require('./dice');
+var Roller = require('../model/roller');
+var Table = require('../model/table');
 
 class DiceRoller {
     constructor() {

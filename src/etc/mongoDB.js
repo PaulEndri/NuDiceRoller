@@ -1,9 +1,24 @@
 var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
+var dbConfig = require('./mongoConfig.js');
 
 class mongoDB {
-    static db = null;
+    get db() {
+        return global._appDb || null;
+    }
 
-    connect(url, callback) {
+    set db(value) {
+        if (!global._appDb) {
+            global._appDb = value;
+        }
+    }
+
+    get defautlUrl() {
+        return dbConfig.url;
+    }
+
+    static connect(url, callback) {
+        url = url || mongoDB.defaultURL;
         if (mongoDB.db === null) {
             MongoClient.connect(url, function (err, db) {
                 assert.equal(null, err);
@@ -17,7 +32,7 @@ class mongoDB {
         }
     }
 
-    close(callback) {
+    static close(callback) {
         if (mongoDB.db !== null) {
             mongoDB.db.close();
         }

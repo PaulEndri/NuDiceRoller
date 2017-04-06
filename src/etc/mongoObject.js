@@ -21,11 +21,32 @@ class MongoObject {
         return null;
     }
 
+    set schema(val) {
+        // No can do, Star Fox
+    }
+
     set id(id) {
         if (!isNaN(id) && id) {
-            this._id = id;
+            if (!this._id) {
+                this._id = id;
+            }
+
             this.loadDocument();
         }
+    }
+
+    static find(criteria, callback) {
+        var db = new mongoDB;
+        db.connect(mongoConfig, function (db) {
+            return db.collection(this.collection).find(criteria).toArray(function (err, docs) {
+                if (typeof (callback) === 'function') {
+                    callback(docs);
+                }
+                else {
+                    return docs;
+                }
+            });;
+        });
     }
 
     validate(callback) {
@@ -64,9 +85,12 @@ class MongoObject {
         var savingObject = {};
 
         Object.keys(this.schema).forEach(function (key) {
-            savingObject.key = this[key];
+            if (typeof (savingObject[key]) === this.schema[key]) {
+                savingObject[key] = this[key];
+            }
         });
 
+        savingObject._id = this._id;
         this.insertDocument(savingObject, callback);
     }
 
